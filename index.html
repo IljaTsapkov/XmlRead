@@ -21,8 +21,6 @@
         <tr>
           <th>Название пункта</th>
           <th>Тип</th>
-	  <th>Округ</th>
-	  <th>Уезд или Город</th>
           <th>Адрес</th>
           <th>Время работы</th>
         </tr>
@@ -46,27 +44,35 @@
                 url: 'locations.xml',           // The file path.
                 dataType: 'xml',    
                 success: function(xml) {
-                   //find all book tags, loop them and append to table body
+                   //find all location tags, loop them and append to table body
                     $(xml).find('LOCATION').each(function() {
                         
                         // Append new data to the tbody element.
+			$country = '-';
+				if ($(this).find('A0_NAME').text()=='EE'){ $country = 'Эстония'; }
+				else if ($(this).find('A0_NAME').text()=='LV'){ $country = 'Латвия'; }
+				else if ($(this).find('A0_NAME').text()=='LT'){ $country = 'Литва'; }
+			$county = '-';
+				if ($(this).find('A1_NAME').text()!=''){ $county = $(this).find('A1_NAME').text(); }
+			$town = '-';
+			    	if ($(this).find('A2_NAME').text()!=''){ $town = $(this).find('A2_NAME').text(); }
+			$settlement = '-';
+			    	if ($(this).find('A3_NAME').text()!=''){ $settlement = $(this).find('A3_NAME').text(); }
+			$street = '-';
+				if ($(this).find('A5_NAME').text()!=''){ $street = $(this).find('A5_NAME').text(); }
+			$hNumber = '-';
+				if ($(this).find('A7_NAME').text()!=''){ $hNumber = $(this).find('A7_NAME').text(); }
+			$workHours = '-';
+				if ($(this).find('SERVICE_HOURS').text()!=''){ $workHours = $(this).find('SERVICE_HOURS').text(); }
+			$type = '-';
+				if ($(this).find('TYPE').text()=='0'){ $type = 'Почтовый автомат'; }
+				else if ($(this).find('TYPE').text()=='1'){ $type = 'Почтовое отделение'; }
                         $('#tableBody').append(
                             '<tr>' +
-                                '<td>' +
-                                    $(this).find('NAME').text() + '</td> ' +
-                                '<td>' +
-                                    $(this).find('TYPE').text() + '</td> ' +
-				'<td>' +
-                                    $(this).find('A1_NAME').text() + '</td> ' +
-                                '<td>' +
-				    $(this).find('A2_NAME').text() + '</td> ' +
-				'<td>' +
-				    $(this).find('A3_NAME').text() + ',' +
-				    $(this).find('A5_NAME').text() + '-' +
-				    $(this).find('A7_NAME').text() +			
-				 '</td> ' +
-                                 '<td>' +
-                                    $(this).find('SERVICE_HOURS').text() + '</td> ' +
+                                '<td>' + $(this).find('NAME').text() + '</td>' +
+                                '<td>' + $type + '</td>' +
+                                '<td>' + 'Страна: ' +$сountry+'/'+'Уезд: ' +$сounty+'/'+'Город: ' +$еown+'/'+ 'Поселение: ' +$settlement+'/'+'Улица: ' +$street+'/'+'Номер дома: ' +$hNumber+'</td> ' +
+                                '<td>' +$workHours + '</td> ' +
                             '</tr>');
                     });
                 }
