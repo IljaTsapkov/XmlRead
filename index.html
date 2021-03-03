@@ -48,31 +48,31 @@
                     $(xml).find('LOCATION').each(function() {
                         
                         // Append new data to the tbody element.
-			$Country = '-';
-				if ($(this).find('A0_NAME').text()=='EE'){ $Country = 'Estonia'; }
-				else if ($(this).find('A0_NAME').text()=='LV'){ $Country = 'Latvia'; }
-				else if ($(this).find('A0_NAME').text()=='LT'){ $Country = 'Lithuania'; }
-			$County = '-';
-				if ($(this).find('A1_NAME').text()!=''){ $County = $(this).find('A1_NAME').text(); }
-			$Town = '-';
-			    	if ($(this).find('A2_NAME').text()!=''){ $Town = $(this).find('A2_NAME').text(); }
-			$Village = '-';
-			    	if ($(this).find('A3_NAME').text()!=''){ $Village = $(this).find('A3_NAME').text(); }
-			$Street = '-';
-				if ($(this).find('A5_NAME').text()!=''){ $Street = $(this).find('A5_NAME').text(); }
-			$Houseno = '-';
-				if ($(this).find('A7_NAME').text()!=''){ $Houseno = $(this).find('A7_NAME').text(); }
-			$SH = '-';
-				if ($(this).find('SERVICE_HOURS').text()!=''){ $SH = $(this).find('SERVICE_HOURS').text(); }
-			$Type = '-';
-				if ($(this).find('TYPE').text()=='0'){ $Type = 'Parcel machine'; }
-				else if ($(this).find('TYPE').text()=='1'){ $Type = 'Post office'; }
+			$country = 'Пусто';
+				if ($(this).find('A0_NAME').text()=='EE'){ $country = 'Эстония'; }
+				else if ($(this).find('A0_NAME').text()=='LV'){ $country = 'Латвия'; }
+				else if ($(this).find('A0_NAME').text()=='LT'){ $country = 'Литва'; }
+			$county = 'Пусто';
+				if ($(this).find('A1_NAME').text()!=''){ $county = $(this).find('A1_NAME').text(); }
+			$town = 'Пусто';
+			    	if ($(this).find('A2_NAME').text()!=''){ $town = $(this).find('A2_NAME').text(); }
+			$settlement = 'Пусто';
+			    	if ($(this).find('A3_NAME').text()!=''){ $settlement = $(this).find('A3_NAME').text(); }
+			$street = 'Пусто';
+				if ($(this).find('A5_NAME').text()!=''){ $street = $(this).find('A5_NAME').text(); }
+			$hNumber = 'Пусто';
+				if ($(this).find('A7_NAME').text()!=''){ $hNumber = $(this).find('A7_NAME').text(); }
+			$workTime = 'Пусто';
+				if ($(this).find('SERVICE_HOURS').text()!=''){ $workTime = $(this).find('SERVICE_HOURS').text(); }
+			$type = 'Пусто';
+				if ($(this).find('TYPE').text()=='0'){ $type = 'Почтовый автомат'; }
+				else if ($(this).find('TYPE').text()=='1'){ $type = 'Почтовое отеделение'; }
                         $('#tableBody').append(
                             '<tr>' +
                                 '<td>' + $(this).find('NAME').text() + '</td>' +
-                                '<td>' + $Type + '</td>' +
-                                '<td>' + 'Country: ' +$Country+'<br/>'+'County: ' +$County+'<br/>'+'Town: ' +$Town+'<br/>'+ 'Village: ' +$Village+'<br/>'+'Street: ' +$Street+'<br/>'+'House no: ' +$Houseno+'</td> ' +
-                                '<td>' +$SH + '</td> ' +
+                                '<td>' + $type + '</td>' +
+                                '<td>' + 'Страна: ' +$country+'/ '+'Уезд: ' +$county+'/ '+'Город: ' +$town+'/ '+ 'Поселение: ' +$settlement+'/ '+'Улица: ' +$street+'/ '+'Номер дома: ' +$hNumber+'</td> ' +
+                                '<td>' +$workTime + '/ ' +
                             '</tr>');
                     });
                 }
